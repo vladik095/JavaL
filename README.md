@@ -1,50 +1,110 @@
-# Logs and QR Code Management
+# Log and QR Code Management
 
-This project provides an API for managing logss and generating QR codes. It utilizes Spring Boot for backend functionality.
+This controller manages logs and QR codes in the application.
 
-## Project Structure
+## Endpoints
 
-- **com.vladislav.spring.jpa.postgresql.model**: Contains model classes used in the application.
-  - `Log.java`: Data model for event logging.
+### Log Management
 
-- **com.vladislav.spring.jpa.postgresql.controller**: Contains REST API controllers for handling requests.
-  - `UserController.java`: Controller for managing tutorials and QR codes.
+- **GET /api/logs**: Retrieve all logs. Can be filtered by author by passing the `author` parameter.
+- **GET /api/logs/{id}**: Retrieve a log by its identifier.
+- **POST /api/logs**: Create a new log. Data about the new log should be sent in the request body.
+- **PUT /api/logs/{id}**: Update an existing log. Data about the updated log should be sent in the request body.
+- **DELETE /api/logs/{id}**: Delete a log by its identifier.
+- **DELETE /api/logs**: Delete all logs.
+- **GET /api/logs/links**: Retrieve logs that are links.
+- **GET /api/log/searchByAuthor**: Search logs by author. Can pass the `author` parameter for searching.
 
-- **com.vladislav.spring.jpa.postgresql.service**: Contains services responsible for business logic.
-  - `LogService.java`: Service for working with event logs.
+### QR Code Management
 
-- **com.vladislav.spring.jpa.postgresql.repository**: Contains repository interfaces for interacting with the database.
-  - `LogRepository.java`: Repository for working with event logs.
-
-- **com.vladislav.spring.jpa.postgresql**: Contains the main application class.
-  - `SpringJpaPostgresqlApplication.java`: Main class to run the Spring Boot application.
-
-- **resources**: Contains application configuration files and other resources.
+- **GET /api/generateQRCode**: Generate a QR code based on the provided text. Accepts a `text` parameter containing the text for generating the QR code.
+- **GET /api/qrCodeDescription/{id}**: Generate a QR code based on the description of a log. Accepts an `id` parameter identifying the log, and generates a QR code based on the description.
 
 ## Database Description
 
-This application uses a PostgreSQL database. It contains a table named `logs` with fields:
+This application uses a PostgreSQL database. It contains a table named `logs` with the following fields:
 
 - `id`: Unique event identifier (type `long`).
 - `Author`: Event author (type `String`).
 - `QRdescription`: Description of the event for generating a QR code (type `String`).
 - `Link`: Flag indicating whether the event is a link (type `boolean`).
 
-## API Description
+## Dependencies
 
-### Tutorial Management
+- **Spring Boot**: For building the application.
+- **Spring Web**: For building RESTful APIs.
+- **PostgreSQL Driver**: Driver for interacting with the PostgreSQL database.
+- **Java Persistence API (JPA)**: For working with object-relational mapping.
+- **Apache Maven**: For managing dependencies and building the project.
 
-- `GET /api/tutorials`: Retrieve all tutorials. Can be filtered by title by passing the `title` parameter.
-- `GET /api/tutorials/{id}`: Retrieve a tutorial by its identifier.
-- `POST /api/tutorials`: Create a new tutorial. Data about the new tutorial should be sent in the request body.
-- `PUT /api/tutorials/{id}`: Update an existing tutorial. Data about the updated tutorial should be sent in the request body.
-- `DELETE /api/tutorials/{id}`: Delete a tutorial by its identifier.
-- `DELETE /api/tutorials`: Delete all tutorials.
-- `GET /api/tutorials/published`: Retrieve all published tutorials.
-- `GET /api/tutorials/searchByTitle`: Search tutorials by title. Can pass the `title` parameter for searching.
+## How to Run
 
-### QR Code Management
+1. Clone the repository:
+    ```
+    git clone https://github.com/vladik095/JAVA.git
+    ```
 
-- `GET /api/generateQRCode`: Generate a QR code based on the provided text. Accepts a `text` parameter containing the text for generating the QR code.
-- `GET /api/qrCodeDescription/{id}`: Generate a QR code based on the description of a tutorial. Accepts an `id` parameter identifying the tutorial, and generates a QR code based on the description.
+2. Build the project:
+    ```
+    mvn clean install
+    ```
+
+3. Run the application:
+    ```
+    mvn spring-boot:run
+    ```
+
+4. The application will start, and you can access the API endpoints described above.
+
+## Usage Examples
+
+- **Retrieve all logs**:
+    ```
+    GET /api/logs
+    ```
+
+- **Retrieve a log by its identifier**:
+    ```
+    GET /api/logs/{id}
+    ```
+
+- **Create a new log**:
+    ```
+    POST /api/logs
+    ```
+
+- **Update an existing log**:
+    ```
+    PUT /api/logs/{id}
+    ```
+
+- **Delete a log by its identifier**:
+    ```
+    DELETE /api/logs/{id}
+    ```
+
+- **Delete all logs**:
+    ```
+    DELETE /api/logs
+    ```
+
+- **Retrieve logs that are links**:
+    ```
+    GET /api/logs/links
+    ```
+
+- **Search logs by author**:
+    ```
+    GET /api/log/searchByAuthor?author={author}
+    ```
+
+- **Generate a QR code using URL**:
+    ```
+    GET /api/generateQRCode?text={your_text_here}
+    ```
+
+- **Generate a QR code based on log description**:
+    ```
+    GET /api/qrCodeDescription/{id}
+    ```
 
