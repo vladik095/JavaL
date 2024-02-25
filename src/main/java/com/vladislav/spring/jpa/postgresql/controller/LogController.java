@@ -113,9 +113,9 @@ public class LogController {
 	}
 
 	@GetMapping("/log/searchByAuthor")
-	public ResponseEntity<List<Log>> getLogByAuthor(@RequestParam("author") String Author) {
+	public ResponseEntity<List<Log>> getLogByAuthor(@RequestParam("author") String author) {
 		try {
-			List<Log> user = userService.findByAuthorContaining(Author);
+			List<Log> user = userService.findByAuthorContaining(author);
 
 			if (user.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
