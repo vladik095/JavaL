@@ -1,5 +1,6 @@
 package com.vladislav.spring.jpa.postgresql.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,12 @@ public class QRCodeController {
 
     private final UserRepository userRepository;
 
+    @Value("${qr.api-base-url}")
+    private String qrApiBaseUrl;
+
+    @Value("${qr.size}")
+    private String qrSize;
+
     public QRCodeController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -27,9 +34,7 @@ public class QRCodeController {
     @GetMapping("/generateQRCode")
     public ResponseEntity<byte[]> generateQRCode(@RequestParam("text") String text) {
         try {
-            String baseUrl = "https://api.qrserver.com/v1/create-qr-code/";
-            String size = "150x150";
-            String url = baseUrl + "?size=" + size + "&data=" + text;
+            String url = qrApiBaseUrl + "?size=" + qrSize + "&data=" + text;
 
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<byte[]> response = restTemplate.getForEntity(url, byte[].class);
@@ -51,9 +56,7 @@ public class QRCodeController {
                 User user = userData.get();
                 String description = user.getDescription();
 
-                String baseUrl = "https://api.qrserver.com/v1/create-qr-code/";
-                String size = "150x150";
-                String url = baseUrl + "?size=" + size + "&data=" + description;
+                String url = qrApiBaseUrl + "?size=" + qrSize + "&data=" + description;
 
                 RestTemplate restTemplate = new RestTemplate();
                 ResponseEntity<byte[]> response = restTemplate.getForEntity(url, byte[].class);
