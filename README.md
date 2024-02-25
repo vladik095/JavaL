@@ -1,6 +1,6 @@
-# Tutorial and QR Code Management
+# Logs and QR Code Management
 
-This project provides an API for managing tutorials and generating QR codes. It utilizes Spring Boot for backend functionality.
+This project provides an API for managing logss and generating QR codes. It utilizes Spring Boot for backend functionality.
 
 ## Project Structure
 
