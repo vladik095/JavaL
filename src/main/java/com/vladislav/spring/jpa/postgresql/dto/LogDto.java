@@ -1,15 +1,15 @@
 package com.vladislav.spring.jpa.postgresql.dto;
 
-public class UserDto {
+public class LogDto {
 
     private String author;
     private String description;
     private boolean link;
 
-    public UserDto() {
+    public LogDto() {
     }
 
-    public UserDto(String author, String description, boolean link) {
+    public LogDto(String author, String description, boolean link) {
         this.author = author;
         this.description = description;
         this.link = link;

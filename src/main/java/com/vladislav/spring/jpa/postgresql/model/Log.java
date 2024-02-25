@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "logs")
-public class User {
+public class Log {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,11 +19,11 @@ public class User {
   @Column(name = "Link")
   private boolean isLink;
 
-  public User() {
+  public Log() {
 
   }
 
-  public User(String author, String description, boolean isLink) {
+  public Log(String author, String description, boolean isLink) {
     this.author = author;
     this.description = description;
     this.isLink = isLink;

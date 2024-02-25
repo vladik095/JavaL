@@ -15,13 +15,13 @@ import org.springframework.lang.Nullable;
 
 import java.util.Optional;
 
-import com.vladislav.spring.jpa.postgresql.model.User;
-import com.vladislav.spring.jpa.postgresql.repository.UserRepository;
+import com.vladislav.spring.jpa.postgresql.model.Log;
+import com.vladislav.spring.jpa.postgresql.repository.LogRepository;
 
 @RestController
 public class QRCodeController {
 
-    private final UserRepository userRepository;
+    private final LogRepository userRepository;
 
     @Value("${qr.api-base-url}")
     private String qrApiBaseUrl;
@@ -29,7 +29,7 @@ public class QRCodeController {
     @Value("${qr.size}")
     private String qrSize;
 
-    public QRCodeController(@Nullable UserRepository userRepository) {
+    public QRCodeController(@Nullable LogRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -52,10 +52,10 @@ public class QRCodeController {
     @GetMapping("/qrCodeDescription/{id}")
     public ResponseEntity<byte[]> getQRCodeDescriptionById(@PathVariable("id") long id) {
         try {
-            Optional<User> userData = userRepository.findById(id);
+            Optional<Log> userData = userRepository.findById(id);
 
             if (userData.isPresent()) {
-                User user = userData.get();
+                Log user = userData.get();
                 String description = user.getDescription();
 
                 String url = qrApiBaseUrl + "?size=" + qrSize + "&data=" + description;
