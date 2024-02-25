@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import org.springframework.lang.Nullable;
+
 import java.util.Optional;
 
 import com.vladislav.spring.jpa.postgresql.model.User;
@@ -27,7 +29,7 @@ public class QRCodeController {
     @Value("${qr.size}")
     private String qrSize;
 
-    public QRCodeController(UserRepository userRepository) {
+    public QRCodeController(@Nullable UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

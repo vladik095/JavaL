@@ -16,19 +16,21 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class UserController {
+	private final UserService userService;
 
-	@Autowired
-	private UserService userService;
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 
 	@GetMapping("/users")
-	public ResponseEntity<List<User>> getAllusers(@RequestParam(required = false) String Author) {
+	public ResponseEntity<List<User>> getAllusers(@RequestParam(required = false) String author) {
 		try {
 			List<User> users = new ArrayList<User>();
 
-			if (Author == null)
+			if (author == null)
 				userService.findAll().forEach(users::add);
 			else
-				userService.findByAuthorContaining(Author).forEach(users::add);
+				userService.findByAuthorContaining(author).forEach(users::add);
 
 			if (users.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
