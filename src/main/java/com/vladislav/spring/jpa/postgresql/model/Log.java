@@ -59,7 +59,7 @@ public class Log {
 
   @Override
   public String toString() {
-    return "User [id=" + id + ", author=" + author + ", desc=" + description + ", isLink=" + isLink + "]";
+    return "Log [id=" + id + ", author=" + author + ", desc=" + description + ", isLink=" + isLink + "]";
   }
 
 }

@@ -9,7 +9,7 @@ import com.vladislav.spring.jpa.postgresql.model.Log;
 
 @Repository
 public interface LogRepository extends JpaRepository<Log, Long> {
-  List<Log> findByIsLink(boolean published);
+  List<Log> findByIsLink(boolean link);
 
   List<Log> findByAuthorContaining(String author);
 

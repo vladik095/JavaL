@@ -41,7 +41,7 @@ public class LogDto {
 
     @Override
     public String toString() {
-        return "UserDto{" +
+        return "LogDto{" +
                 "author='" + author + '\'' +
                 ", description='" + description + '\'' +
                 ", link=" + link +
